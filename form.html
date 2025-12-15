@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Registration Form</title>
+  <style>
+    :root{--bg:#f6f8fb;--card:#ffffff;--accent:#4a90e2;--muted:#6b7280}
+    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; background:var(--bg); margin:0; display:flex; align-items:center; justify-content:center; min-height:100vh}
+    .container{background:var(--card); padding:28px; border-radius:12px; box-shadow:0 6px 20px rgba(18,38,63,.08); width:100%; max-width:760px}
+    h1{margin:0 0 14px 0; font-size:20px}
+    form{display:grid; grid-template-columns:1fr 1fr; gap:14px}
+    label{display:block; font-size:13px; color:var(--muted); margin-bottom:6px}
+    input[type="text"], input[type="password"], input[type="email"], input[type="tel"], select, textarea{
+      width:100%; padding:10px 12px; border:1px solid #e6e9ef; border-radius:8px; font-size:14px; box-sizing:border-box
+    }
+    textarea{resize:vertical; min-height:100px}
+    .full{grid-column:1/-1}
+    .radio-group{display:flex; gap:12px; align-items:center}
+    .actions{display:flex; gap:10px; justify-content:flex-end; grid-column:1/-1; margin-top:6px}
+    button{padding:10px 16px; border-radius:8px; border:none; cursor:pointer; font-weight:600}
+    button[type="submit"]{background:var(--accent); color:white}
+    button[type="reset"]{background:transparent; border:1px solid #e6e9ef}
+    @media (max-width:640px){form{grid-template-columns:1fr} .actions{justify-content:stretch} .actions button{flex:1}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Registration Form</h1>
+    <form id="regForm" method="post" action="#" novalidate>
+      <div>
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" name="firstName" placeholder="Enter first name" required />
+      </div>
+
+      <div>
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" name="lastName" placeholder="Enter last name" required />
+      </div>
+
+      <div>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Create a password" minlength="6" required />
+      </div>
+
+      <div>
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="10-digit phone number" pattern="[0-9]{10}" required />
+      </div>
+
+      <div>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required />
+      </div>
+
+      <div>
+        <label>Gender</label>
+        <div class="radio-group" role="radiogroup" aria-labelledby="genderLabel">
+          <label><input type="radio" name="gender" value="male" required> Male</label>
+          <label><input type="radio" name="gender" value="female"> Female</label>
+          <label><input type="radio" name="gender" value="other"> Other</label>
+        </div>
+      </div>
+
+      <div>
+        <label for="department">Department</label>
+        <select id="department" name="department" required>
+          <option value="">-- Select department --</option>
+          <option value="IT">IT</option>
+          <option value="CSE">CSE</option>
+          <option value="ECE">ECE</option>
+          <option value="EEE">EEE</option>
+          <option value="MECH">MECH</option>
+          <option value="MBA">MBA</option>
+        </select>
+      </div>
+
+      <div class="full">
+        <label for="address">Address</label>
+        <textarea id="address" name="address" placeholder="Enter your full address" required></textarea>
+      </div>
+
+      <div class="actions">
+        <button type="reset">Reset</button>
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    // Simple client-side feedback for invalid fields
+    const form = document.getElementById('regForm');
+    form.addEventListener('submit', (e) => {
+      if (!form.checkValidity()) {
+        e.preventDefault();
+        // show native validation UI
+        form.reportValidity();
+      } else {
+        // For demo purposes prevent actual submission and show a message
+        e.preventDefault();
+        alert('Form submitted (demo) — you can wire this to a server endpoint.');
+        form.reset();
+      }
+    });
+  </script>
+</body>
+</html>
